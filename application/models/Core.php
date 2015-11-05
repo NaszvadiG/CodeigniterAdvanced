@@ -16,10 +16,10 @@ class Core extends CI_Model {
 
                 break;
             case("en"):
-                $this->lang->load('majoradom', 'english');
+                $this->lang->load('system', 'english');
                 break;
             case("fr"):
-                $this->lang->load('majoradom', 'french');
+                $this->lang->load('system', 'french');
                 break;
         }
         $this->output->set_header("HTTP/1.0 200 OK");
@@ -42,43 +42,12 @@ class Core extends CI_Model {
         $data['debug'] = $this->config->item("debug");
         if (!$is_ajax) {
             $data['csss_default'] = array(
-                $data['base_assets_url'] . 'bootstrap/css/bootstrap.css',
-                $data['base_assets_url'] . 'fonts/font-awesome/css/font-awesome.css',
-                $data['base_assets_url'] . 'fonts/fontello/css/fontello.css',
-                $data['base_assets_url'] . 'plugins/magnific-popup/magnific-popup.css',
-                $data['base_assets_url'] . 'css/animations.css',
-                $data['base_assets_url'] . 'plugins/hover/hover-min.css',
-                $data['base_assets_url'] . 'css/style.css',
-                $data['base_assets_url'] . 'css/skins/dark_cyan.css',
-                $data['base_assets_url'] . 'css/custom.css',
-                $data['base_assets_url'] . 'css/tagmanager.css',
-                $data['base_assets_url'] . 'css/default.css',
             );
             $data['jss_default'] = array(
-                $data['base_assets_url'] . 'js/jquery.mockjax.js',
-                $data['base_assets_url'] . 'js/jquery.autocomplete.js',
-                $data['base_assets_url'] . 'bootstrap/js/bootstrap.min.js',
-                $data['base_assets_url'] . 'plugins/modernizr.js',
-                $data['base_assets_url'] . 'plugins/rs-plugin/js/jquery.themepunch.tools.min.js',
-                $data['base_assets_url'] . 'plugins/rs-plugin/js/jquery.themepunch.revolution.min.js',
-                $data['base_assets_url'] . 'plugins/magnific-popup/jquery.magnific-popup.min.js',
-                $data['base_assets_url'] . 'plugins/waypoints/jquery.waypoints.min.js',
-                $data['base_assets_url'] . 'plugins/jquery.countTo.js',
-                $data['base_assets_url'] . 'plugins/jquery.parallax-1.1.3.js',
-                $data['base_assets_url'] . 'plugins/jquery.validate.js',
-                $data['base_assets_url'] . 'plugins/vide/jquery.vide.js',
-                $data['base_assets_url'] . 'plugins/jquery.browser.js',
-                $data['base_assets_url'] . 'plugins/SmoothScroll.js',
-                $data['base_assets_url'] . 'plugins/bootstrap-notify/bootstrap-notify.js',
-                $data['base_assets_url'] . 'js/template.js',
-                $data['base_assets_url'] . 'js/custom.js',
             );
             $data['jss_top'] = array(
-                $data['base_assets_url'] . 'js/jquery-1.11.2.min.js',
-                $data['base_assets_url'] . 'js/com.majoradom.js'
             );
-            if(isset($data['jss_top_add']))
-            {
+            if (isset($data['jss_top_add'])) {
                 $data['jss_top'] = array_merge($data['jss_top_add'], $data['jss_top']);
             }
             if (isset($data['jss_add'])) {
@@ -99,10 +68,6 @@ class Core extends CI_Model {
 
         $this->load->view($view, $data);
         if (!$is_ajax) {
-            if (isset($data['use_block_footer'])) {
-                $this->load->view('template/footer_info', $data);
-            }
-
             $this->load->view('template/footer', $data);
         }
     }

@@ -40,7 +40,7 @@ class Sitemap extends CI_Model {
     public function comment($str) {
         $this->html .= '<!-- ' . $str . '-->';
     }
-    
+
     private function close() {
         $this->html .= '</urlset>';
     }
