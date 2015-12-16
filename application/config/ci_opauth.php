@@ -21,6 +21,14 @@ $config['opauth_config'] = array(
             'client_id' => 'client_id',
             'client_secret' => 'client_secret'
         ),
+        'Instagram' => array(
+            'client_id' => 'client_id',
+            'client_secret' => 'client_secret'
+        ),
+        'LinkedIn' => array(
+            'api_key' => 'YOUR API KEY',
+            'secret_key' => 'YOUR SECRET KEY'
+        ),
         'OpenID' => array(
             'openid_url' => 'openid_url'
         )
