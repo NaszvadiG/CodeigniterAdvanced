@@ -20,11 +20,11 @@ class User extends CI_Model {
     }
 
     public function infoWithEmail($users_email) {
-        $sql = "SELECT * FROM users WHERE users.users_email=? LIMIT 1";
-        $result = $this->db->query($sql, array($users_email));
+        $this->db->where("users.users_email", $users_email);
+        $result = $this->db->get("users");
         if ($result->num_rows() == 1) {
             $users = $result->result();
-            return $users[0];
+            return $users;
         } else {
             return false;
         }
@@ -33,11 +33,11 @@ class User extends CI_Model {
     public function info() {
         $users_id = $this->_is_connect();
         if ($users_id) {
-            $sql = "SELECT * FROM users WHERE users.users_id =?";
-            $result = $this->db->query($sql, array($users_id));
+            $this->db->where("users_id", $users_id);
+            $result = $this->db->get("users");
             $data = $result->result();
-            if (isset($data[0])) {
-                return $data[0];
+            if (isset($data)) {
+                return $data;
             } else {
                 return false;
             }
@@ -46,9 +46,8 @@ class User extends CI_Model {
         }
     }
 
-    public function add($users_nickname, $users_email, $users_password, $users_token, $users_date_insert) {
-        $data = array('users_nickname' => $users_nickname, 'users_email' => $users_email, 'users_password' => $users_password, 'users_token' => $users_token, 'users_date_insert' => $users_date_insert);
-        $this->db->insert('users', $data);
+    public function add($users_data) {
+        $this->db->insert('users', $users_data);
         return $this->db->insert_id();
     }
 
@@ -71,11 +70,11 @@ class User extends CI_Model {
     }
 
     public function detail($users_id) {
-        $sql = "SELECT * FROM users WHERE users.users_id=?";
-        $result = $this->db->query($sql, array(intval($users_id)));
+        $this->db->where("users_id", $users_id);
+        $result = $this->db->get("users");
         if ($result->num_rows() == 1) {
             $data = $result->result();
-            return $data[0];
+            return $data;
         } else {
             return false;
         }
