@@ -30,9 +30,6 @@ class Core extends CI_Model {
         $this->output->set_header("Pragma: no-cache");
         $data['base_url'] = $this->config->base_url();
         $data['user'] = $this->User->info();
-        if ($data['user']) {
-            $data['users_favourites'] = $this->User->favourites_get($data['user']->users_id, 'users_favourites.services_id');
-        }
         if (!isset($data['title'])) {
             $data['title'] = "NO TITLE";
         }
@@ -46,6 +43,7 @@ class Core extends CI_Model {
             $data['jss_default'] = array(
             );
             $data['jss_top'] = array(
+                //your default js in top
             );
             if (isset($data['jss_top_add'])) {
                 $data['jss_top'] = array_merge($data['jss_top_add'], $data['jss_top']);
@@ -75,24 +73,6 @@ class Core extends CI_Model {
     public function JSON($return) {
         header('Content-Type: application/json');
         echo json_encode($return);
-    }
-
-    public function debug($str) {
-        $fopen = fopen("debug/" . date("Y_m_d") . ".txt", "a");
-        fwrite("DEBUG : \n");
-        if (is_array($str)) {
-            foreach ($str as $key => $value) {
-                fwrite($str);
-            }
-        } else {
-            fwrite($str);
-        }
-        fclose($fopen);
-    }
-
-    private function out() {
-        $data['test'] = "";
-        $this->load("users/connexion", $data);
     }
 
     private function maintenance() {
